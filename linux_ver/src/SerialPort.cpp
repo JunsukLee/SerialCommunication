@@ -46,9 +46,10 @@ bool SerialPort::ConfigurePort(int BUF_SIZE)
     return result;
 }
 
-bool SerialPort::serialData_write(std::string data)
+bool SerialPort::serialData_write(char *data)
 {
-    write(fd, "write_aaa", BUF_MAX);
+    //write(fd, "write_aaa", BUF_MAX);
+    write(fd, data, BUF_MAX);
     return true;
 /*
     if(write(fd, "write_aaa", BUF_MAX) != -1)
