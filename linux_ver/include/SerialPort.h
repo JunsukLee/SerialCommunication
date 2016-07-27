@@ -14,7 +14,7 @@ class SerialPort
 public:
 	bool OpenPort();
 	bool ConfigurePort(int BUF_MAX);
-	bool serialData_write(std::string data);
+	bool serialData_write(char data[512]);
 	char* serialData_read();
 	bool closePort();
 private:
