@@ -1,13 +1,19 @@
 #include "SerialPort.h"
 bool SerialPort::OpenPort()
 {
-    fd = open( "/dev/ttyACM2", O_RDWR | O_NOCTTY );
-    if(fd >= 0){ // OpenPort success
-	memset( &newtio, 0, sizeof(newtio) );
-	return true;
-    }else{       // OpenPort fail
-	return false;
-    }    
+    for(int num=0; num < 20; num++){
+        char portURL[128];
+	sprintf(portURL, "/dev/ttyACM%d",num);
+	fd = open( portURL, O_RDWR | O_NOCTTY );
+
+        if(fd >= 0){ // OpenPort success
+  	    memset( &newtio, 0, sizeof(newtio) );
+	    return true;
+        }    
+    }
+
+    // OpenPort fail
+    return false;    
 }
 
 bool SerialPort::ConfigurePort(int BUF_SIZE)
